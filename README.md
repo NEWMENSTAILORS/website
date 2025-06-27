@@ -1,2 +1,1 @@
-# website    
-whole credit to @LakshayBhoria
+# website    whole credit to @LakshayBhoria
