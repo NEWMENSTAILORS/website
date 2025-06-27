@@ -81,10 +81,29 @@
       display:flex; flex-direction:column; gap:10px; z-index:1001;
     }
     .social-icons-right a img { width:32px; height:32px; }
+
+    /* Floating Call Button */
+    .call-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-color: #0cb528;
+      padding: 15px;
+      border-radius: 50%;
+      box-shadow: 0px 4px 10px rgba(0,0,0,0.3);
+      text-align: center;
+      text-decoration: none;
+      z-index: 1001;
+    }
+    .call-btn img {
+      width: 28px;
+      height: 28px;
+    }
   </style>
 </head>
 <body>
 
+  <!-- Header -->
   <header>
     <div class="branding">
       <img src="white.png" alt="NMT Logo" />
@@ -105,6 +124,7 @@
     </nav>
   </header>
 
+  <!-- Hero -->
   <section id="home-section" class="hero">
     <div class="welcome-text">Welcome to NMT - New Men's Tailors</div>
     <div class="sub-welcome">Elevating men’s fashion with precision tailoring and royal elegance. Experience the essence of style and tradition.</div>
@@ -124,14 +144,20 @@
     </div>
   </section>
 
+  <!-- Social Icons -->
   <div class="social-icons-right">
     <a href="https://facebook.com" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"></a>
     <a href="https://www.instagram.com/newmenstailors/" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"></a>
     <a href="https://mail.google.com/mail/" target="_blank"><img src="email.webp" alt="Email"></a>
-   
+    <a href="https://wa.me/918607945154" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"></a>
   </div>
 
-  <div id="about-output" class="output-container">
+  <!-- Floating Call Button with Icon -->
+  <a href="tel:+918607945154" class="call-btn" title="Call Now">
+    <img src="phone-call-icon.png" alt="Call">
+  </a>
+
+   <div id="about-output" class="output-container">
     <h2>About Us</h2>
     <p>New Men's Tailors has been a trusted name in men’s fashion since 1998, offering exceptional craftsmanship, timeless style, and unmatched personal service. Based in Bahalgarh, Sonipat, Haryana, we specialize in custom tailoring for all occasions — from weddings and formal events to everyday elegance. With a deep understanding of traditional techniques and a sharp eye for modern trends, we create garments that reflect confidence, character, and class. Whether you're looking for a perfectly fitted sherwani, a classic three-piece suit, or a casual yet sharp look, our skilled tailors ensure every stitch meets your expectations. At New Men's Tailors, we don’t just sew clothes — we shape your style.</p>
   </div>
@@ -210,26 +236,13 @@
     <img id="modalImg" />
   </div>
 
-  <footer class="footer">&copy; 2025 NMT | New Men's Tailors. All rights reserved.</footer>
-   <a href="tel: +91 9671357519" style="
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background-color: #0cb528;
-    color: rgb(255, 255, 255);
-    padding: 15px 20px;
-    border-radius: 50000000000%;
-    box-shadow: 4px 0px rgba(0,0,0,0.3);
-    text-align: center;
-    text-decoration: none;
-    font-size: 30px;
-    z-index:   1001;
-  " title="Call Now">
-    ✆
-  </a>
-  
-  
+  <!-- Remaining Sections (About, Services, etc.) -->
+  <!-- Keep your other sections as-is from your existing code -->
+  <!-- ... -->
 
+  <footer class="footer">&copy; 2025 NMT | New Men's Tailors. All rights reserved.</footer>
+
+  <!-- Scripts -->
   <script>
     let slideIndex = 0;
     function showSlides() {
@@ -237,7 +250,7 @@
       slides.forEach(slide => slide.style.display = "none");
       slideIndex++;
       if (slideIndex > slides.length) slideIndex = 1;
-      slides[slideIndex-1].style.display = "block";
+      slides[slideIndex - 1].style.display = "block";
       setTimeout(showSlides, 4000);
     }
     showSlides();
@@ -253,16 +266,17 @@
           outputs.forEach(o => o.classList.remove("active"));
           const tgt = link.getAttribute("data-target");
           if (tgt === "home") {
-            window.scrollTo({top:0, behavior:"smooth"});
+            window.scrollTo({ top: 0, behavior: "smooth" });
           } else {
             const sec = document.getElementById(tgt + "-output");
             if (sec) {
               sec.classList.add("active");
-              sec.scrollIntoView({behavior:"smooth"});
+              sec.scrollIntoView({ behavior: "smooth" });
             }
           }
         });
       });
+
       document.querySelectorAll(".gallery img").forEach(img => {
         img.addEventListener("click", () => {
           document.getElementById("imageModal").style.display = "flex";
@@ -273,4 +287,5 @@
   </script>
 </body>
 </html>
+
 
