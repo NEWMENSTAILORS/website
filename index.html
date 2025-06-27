@@ -7,6 +7,7 @@
   <style>
     * { margin:0; padding:0; box-sizing:border-box; }
     body { font-family:'Segoe UI', sans-serif; background:#fff; color:#333; }
+
     header {
       position:fixed; top:0; width:100%; display:flex; justify-content:space-between;
       align-items:center; padding:1rem 2rem; background-color:rgba(128,0,32,0.9);
@@ -16,6 +17,11 @@
     .branding img { height:50px; }
     .branding-text h1 { font-size:1.8rem; margin-bottom:2px; }
     .branding-text span { font-size:0.85rem; color:#eee; }
+
+    nav {
+      display: flex;
+      align-items: center;
+    }
     nav a {
       color:white; text-decoration:none; margin:0 0.7rem;
       font-weight:500; cursor:pointer;
@@ -23,7 +29,6 @@
     nav a.active { border-bottom:2px solid white; }
     nav a:hover { text-decoration:underline; }
 
-    /* Hamburger styles */
     .hamburger {
       display: none;
       flex-direction: column;
@@ -40,22 +45,24 @@
 
     @media (max-width: 768px) {
       nav {
-        position: fixed;
+        position: absolute;
         top: 80px;
-        right: -100%;
+        left: 0;
+        right: 0;
+        background-color: rgba(128, 0, 32, 0.95);
         flex-direction: column;
-        background-color: rgba(128,0,32,0.95);
-        width: 200px;
-        height: calc(100% - 80px);
-        padding-top: 1rem;
-        transition: right 0.3s ease;
-      }
-      nav a {
-        margin: 1rem;
-        font-size: 1.2rem;
+        width: 100%;
+        display: none;
+        padding: 1rem 0;
+        text-align: center;
       }
       nav.active {
-        right: 0;
+        display: flex;
+      }
+      nav a {
+        margin: 1rem 0;
+        font-size: 1.3rem;
+        display: block;
       }
       .hamburger {
         display: flex;
@@ -69,9 +76,11 @@
     .sub-welcome {
       font-size:1.1rem; max-width:700px; margin:0 auto 2rem;
     }
+
     .slideshow-container { position:relative; max-width:100%; margin:auto; overflow:hidden; }
     .slide { display:none; position:relative; }
     .slide img { width:100%; height:500px; object-fit:cover; }
+
     .caption {
       position:absolute; bottom:30px; left:50%; transform:translateX(-50%);
       color:white; background:rgba(0,0,0,0.6); padding:1rem 2rem;
@@ -79,6 +88,7 @@
     }
     .caption h3 { font-size:2rem; font-weight:bold; margin-bottom:0.3rem; }
     .caption p { font-size:1rem; }
+
     .output-container {
       background-color:rgba(255,255,255,0.95); padding:4rem 2rem;
       font-size:1.5rem; line-height:1.8; display:none; text-align:center;
@@ -87,6 +97,7 @@
     .output-container h2 {
       color:#800020; font-size:2.5rem; margin-bottom:1rem;
     }
+
     form input, form textarea, form button {
       display:block; width:100%; margin:0.5rem 0; padding:0.9rem;
       font-size:1rem; border:1px solid #ccc; border-radius:5px;
@@ -97,30 +108,36 @@
       cursor:pointer; font-weight:bold; border-radius:5px;
     }
     form button:hover { background-color:#66001a; }
+
     iframe {
       width:100%; height:400px; border:0; margin-top:1rem;
     }
+
     .footer {
       text-align:center; background-color:#800020; color:white;
       padding:1.5rem; margin-top:2rem; font-size:1rem;
       z-index:2; position:relative;
     }
+
     .gallery img {
       width:200px; height:auto; margin:10px;
       border-radius:10px; cursor:pointer; transition:transform 0.3s;
     }
     .gallery img:hover { transform:scale(1.05); }
+
     .modal {
       display:none; position:fixed; top:0; left:0; width:100%; height:100%;
       background:rgba(0,0,0,0.85); justify-content:center; align-items:center;
       z-index:9999;
     }
     .modal img { max-width:90%; max-height:90%; border-radius:10px; box-shadow:0 0 20px rgba(255,255,255,0.3); }
+
     .social-icons-right {
       position:fixed; top:50%; right:10px; transform:translateY(-50%);
       display:flex; flex-direction:column; gap:10px; z-index:1001;
     }
     .social-icons-right a img { width:32px; height:32px; }
+
     .call-btn {
       position: fixed;
       bottom: 20px;
@@ -139,8 +156,8 @@
     }
   </style>
 </head>
-<body>
 
+<body>
   <!-- Header -->
   <header>
     <div class="branding">
@@ -160,7 +177,7 @@
       <a href="#" data-target="appointment">Appointment</a>
       <a href="#" data-target="contact">Contact</a>
     </nav>
-    <!-- Hamburger button -->
+    <!-- Hamburger -->
     <div class="hamburger" onclick="toggleMenu()">
       <div></div>
       <div></div>
@@ -173,18 +190,9 @@
     <div class="welcome-text">Welcome to NMT - New Men's Tailors</div>
     <div class="sub-welcome">Elevating men’s fashion with precision tailoring and royal elegance. Experience the essence of style and tradition.</div>
     <div class="slideshow-container">
-      <div class="slide">
-        <img src="TAILOR1.png" alt="Slide 1">
-        <div class="caption"><h3>Trust, Quality, Excellence.</h3><p>Premium tailoring in Bahalgarh, Sonipat, Haryana.</p></div>
-      </div>
-      <div class="slide">
-        <img src="TAILOR3.jpg" alt="Slide 2">
-        <div class="caption"><h3>Wedding Perfection</h3><p>Custom sherwanis & suits for your special day.</p></div>
-      </div>
-      <div class="slide">
-        <img src="TAILOR5.webp" alt="Slide 3">
-        <div class="caption"><h3>Modern Styles</h3><p>Fashion for today’s gentlemen, sharp and elegant.</p></div>
-      </div>
+      <div class="slide"><img src="TAILOR1.png" alt="Slide 1"><div class="caption"><h3>Trust, Quality, Excellence.</h3><p>Premium tailoring in Bahalgarh, Sonipat, Haryana.</p></div></div>
+      <div class="slide"><img src="TAILOR3.jpg" alt="Slide 2"><div class="caption"><h3>Wedding Perfection</h3><p>Custom sherwanis & suits for your special day.</p></div></div>
+      <div class="slide"><img src="TAILOR5.webp" alt="Slide 3"><div class="caption"><h3>Modern Styles</h3><p>Fashion for today’s gentlemen, sharp and elegant.</p></div></div>
     </div>
   </section>
 
@@ -193,92 +201,25 @@
     <a href="https://facebook.com" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook"></a>
     <a href="https://www.instagram.com/newmenstailors/" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram"></a>
     <a href="https://mail.google.com/mail/" target="_blank"><img src="email.webp" alt="Email"></a>
-    <a href="https://wa.me/9671357519" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"></a>
+    <a href="https://wa.me/918607945154" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="WhatsApp"></a>
   </div>
 
-  <!-- Floating Call Button -->
-  <a href="tel:+919671357519" class="call-btn" title="Call Now">
-    <img src="phone-call-icon.png" alt="Call">
-  </a>
+  <!-- Call Button -->
+  <a href="tel:+918607945154" class="call-btn" title="Call Now"><img src="phone-call-icon.png" alt="Call"></a>
 
-  <div id="about-output" class="output-container">
-    <h2>About Us</h2>
-    <p>New Men's Tailors has been a trusted name in men’s fashion since 1998, offering exceptional craftsmanship, timeless style, and unmatched personal service. Based in Bahalgarh, Sonipat, Haryana, we specialize in custom tailoring for all occasions — from weddings and formal events to everyday elegance. With a deep understanding of traditional techniques and a sharp eye for modern trends, we create garments that reflect confidence, character, and class. Whether you're looking for a perfectly fitted sherwani, a classic three-piece suit, or a casual yet sharp look, our skilled tailors ensure every stitch meets your expectations. At New Men's Tailors, we don’t just sew clothes — we shape your style.</p>
-  </div>
+  <!-- Section Outputs -->
+  <div id="about-output" class="output-container"><h2>About Us</h2><p>New Men's Tailors has been a trusted name...</p></div>
+  <div id="services-output" class="output-container"><h2>Our Services</h2><p>At <strong>New Men's Tailors</strong>...</p></div>
+  <div id="location-output" class="output-container"><h2>Store Location</h2><p>Visit us at: front of government school, Bahalgarh...</p><iframe src="https://www.google.com/maps/embed?pb=..." allowfullscreen loading="lazy"></iframe></div>
+  <div id="gallery-output" class="output-container gallery"><h2>Gallery</h2><img src="TAILOR1.png"><img src="TAILOR3.jpg"><img src="TAILOR5.webp"></div>
+  <div id="offers-output" class="output-container"><h2>Current Offers</h2><ul><li>Monsoon Special: 20% off...</li></ul></div>
+  <div id="appointment-output" class="output-container"><h2>Book an Appointment</h2><form action="https://formspree.io/f/xjkrjkle" method="POST"><input type="text" name="name" placeholder="Your Name" required><input type="email" name="email" placeholder="Your Email" required><input type="date" name="date" required><textarea name="details" placeholder="What would you like stitched?" required></textarea><button type="submit">Book Now</button></form></div>
+  <div id="contact-output" class="output-container"><h2>Contact Us</h2><form action="https://formspree.io/f/xjkrjkle" method="POST"><input type="text" name="name" placeholder="Your Name" required><input type="email" name="email" placeholder="Your Email" required><textarea name="message" placeholder="Your Message" required></textarea><button type="submit">Send</button></form></div>
 
-  <div id="services-output" class="output-container">
-    <h2>Our Services</h2>
-    <p>At <strong>New Men's Tailors</strong>, we take pride in offering a full range of custom stitching services to meet the diverse fashion needs of our clients. With over two decades of experience, we blend traditional techniques with modern trends to deliver impeccable fits and premium finishes.</p>
-    <ul style="text-align:left; max-width:700px; margin:2rem auto;">
-      <li><strong>👔 Men’s Tailoring</strong>
-        <ul><li>Formal Suits (2-piece & 3-piece)</li><li>Blazers & Waistcoats</li><li>Shirts & Trousers</li><li>Tuxedos & Dinner Jackets</li></ul>
-      </li>
-      <li><strong>👑 Wedding Attire</strong>
-        <ul><li>Sherwanis</li><li>Indo-Western Suits</li><li>Achkans</li><li>Kurta Pajamas & Bandhgalas</li></ul>
-      </li>
-      <li><strong>🧵 Casual Wear</strong>
-        <ul><li>Casual Shirts</li><li>Chinos & Jeans Alteration</li><li>Shorts & Casual Trousers</li></ul>
-      </li>
-      <li><strong>🧥 Ethnic & Festive Wear</strong>
-        <ul><li>Kurta Sets with Jackets</li><li>Pathani Suits</li><li>Custom Accessories (Pocket Squares, Stoles, etc.)</li></ul>
-      </li>
-      <li><strong>🔧 Alteration & Custom Fit Services</strong>
-        <ul><li>Fit Adjustments</li><li>Sleeve & Length Alterations</li><li>Waist, Shoulder, and Neckline Refinement</li><li>Quick Fix & Urgent Stitching</li></ul>
-      </li>
-    </ul>
-  </div>
+  <!-- Modal -->
+  <div id="imageModal" class="modal" onclick="this.style.display='none'"><img id="modalImg"></div>
 
-  <div id="location-output" class="output-container">
-    <h2>Store Location</h2>
-    <p>Visit us at:<br><strong>front of government school, bahalgarh (131021), sonipat, Haryana, India</strong></p>
-    <p><a href="https://www.google.com/maps/place/NEW+MEN%27S+TAILORS+(NMT)/@28.959534,77.0800505,14.51z/data=!4m6!3m5!1s0x390daf3d1494089d:0x43fe1fb236462bc3!8m2!3d28.9585617!4d77.0936856!16s%2Fg%2F11rfrsrrr0?entry=ttu"
-         target="_blank" style="color:#800020;font-weight:bold;text-decoration:underline;">
-      View on Google Maps
-    </a></p>
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3514.6318916700235!2d77.09109617535469!3d28.95856167624016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x390daf3d1494089d%3A0x43fe1fb236462bc3!2sNEW%20MEN'S%20TAILORS%20(NMT)!5e0!3m2!1sen!2sin!4v1719477163555!5m2!1sen!2sin" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-  </div>
-
-  <div id="gallery-output" class="output-container gallery">
-    <h2>Gallery</h2>
-    <img src="TAILOR1.png" alt="Gallery 1">
-    <img src="TAILOR3.jpg" alt="Gallery 2">
-    <img src="TAILOR5.webp" alt="Gallery 3">
-  </div>
-
-  <div id="offers-output" class="output-container">
-    <h2>Current Offers</h2>
-    <ul style="text-align:left; max-width:600px; margin:auto;">
-      <li><strong>Monsoon Special:</strong> Get 20% off on all custom suits until July 31!</li>
-      <li><strong>Wedding Package:</strong> Book 3 groomsmen outfits and get exciting gifts.</li>
-      <li><strong>First Time Customer:</strong> Flat ₹500 off on your first order above ₹5000.</li>
-    </ul>
-  </div>
-
-  <div id="appointment-output" class="output-container">
-    <h2>Book an Appointment</h2>
-    <form action="https://formspree.io/f/xjkrjkle" method="POST">
-  <input type="text" name="name" placeholder="Your Name" required />
-  <input type="email" name="email" placeholder="Your Email" required />
-  <input type="date" name="date" required />
-  <textarea name="details" placeholder="What would you like stitched?" required></textarea>
-  <button type="submit">Book Now</button>
-</form>
-</div>
-
-<div id="contact-output" class="output-container">
-    <h2>Contact Us</h2>
-    <form action="https://formspree.io/f/xjkrjkle" method="POST">
-      <input type="text" name="name" placeholder="Your Name" required />
-      <input type="email" name="email" placeholder="Your Email" required />
-      <textarea name="message" placeholder="Your Message" required></textarea>
-      <button type="submit">Send</button>
-    </form>
-  </div>
-
-  <div id="imageModal" class="modal" onclick="this.style.display='none'">
-    <img id="modalImg" />
-  </div>
-
+  <!-- Footer -->
   <footer class="footer">&copy; 2025 NMT | New Men's Tailors. All rights reserved.</footer>
 
   <!-- Scripts -->
@@ -313,7 +254,6 @@
               sec.scrollIntoView({ behavior: "smooth" });
             }
           }
-          // Close nav on link click (mobile)
           document.querySelector("nav").classList.remove("active");
         });
       });
