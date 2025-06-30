@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>NMT | New Men's Tailors</title>
+
   <style>
   * { margin:0; padding:0; box-sizing:border-box; }
   body { font-family:'Segoe UI', sans-serif; background:#fff; color:#333; }
@@ -20,8 +21,9 @@
   justify-content:space-between;
   align-items:center;
   padding:1rem 2rem;
-  background-color:rgba(128,0,32,0.9);
+   background-color:rgba(128,0,32,0.9);
   color:white;
+  z-index:1000;
   z-index:1000;
 }
 .branding {
@@ -328,6 +330,67 @@ nav a:hover {
     display: flex;
   }
 }
+.custom-footer {
+  background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)),
+              url('nmt1.png') center/cover no-repeat;
+  color: #fff;
+  padding: 3rem 2rem;
+  font-size: 1rem;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.footer-column {
+  flex: 1 1 220px;
+}
+
+.footer-column h3 {
+  margin-bottom: 1rem;
+  font-size: 1.2rem;
+  color: white;
+}
+
+.footer-column ul {
+  list-style: none;
+  padding: 0;
+}
+
+.footer-column li {
+  margin-bottom: 0.5rem;
+  opacity: 0.9;
+}
+
+.footer-column p {
+  margin-bottom: 0.7rem;
+  opacity: 0.9;
+}
+
+.social-footer {
+  display: flex;
+  gap: 10px;
+  margin-top: 1rem;
+}
+
+.social-footer img {
+  width: 24px;
+  height: 24px;
+  filter: invert(1);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+  }
+}
+
 
 </style>
 </head>
@@ -372,6 +435,7 @@ nav a:hover {
   <!-- Hero -->
   <section id="home-section" class="hero">
     <div class="welcome-text">Welcome to NMT - New Men's Tailors</div>
+
     <div class="sub-welcome">Elevating men’s fashion with precision tailoring and royal elegance. Experience the essence of style and tradition.</div>
     <div class="slideshow-container">
       <div class="slide"><img src="TAILOR1.png" alt="Slide 1"><div class="caption"><h3>Trust, Quality, Excellence.</h3><p>Premium tailoring in Bahalgarh, Sonipat, Haryana.</p></div></div>
@@ -394,6 +458,9 @@ nav a:hover {
   
   <div id="about-output" class="output-container">
     <h2>About Us</h2>
+    <p> <strong>RATTAN SINGH</strong>
+      <p>CEO & FOUNDER (NMT)</p>
+
     <p>New Men's Tailors has been a trusted name in men’s fashion since 1998, offering exceptional craftsmanship, timeless style, annd we specialize in custom tailoring for all occasions — from weddings and formal events to everyday elegance. With a deep understanding of traditional techniques and a sharp eye for modern trends, we create garments that reflect confidence, character, and class. At New Men's Tailors, we don’t just sew clothes — we shape your style.</p>
   </div>
 
@@ -467,6 +534,48 @@ nav a:hover {
   </div>
 
   <div id="imageModal" class="modal" onclick="this.style.display='none'"><img id="modalImg"></div>
+  <!-- Custom Raymond-style Footer -->
+<section class="custom-footer">
+  <div class="footer-container">
+    <div class="footer-column">
+      <h3>Our Company</h3>
+      <ul>
+       <!-- Our Company -->
+<ul>
+  <li data-target="about">About Us</li>
+  <li data-target="about">NEW MEN'S TAILORS </li>
+  <li data-target="location">Our Store</li>
+</ul>
+
+
+
+<!-- Quick Links -->
+<ul>
+  <li data-target="services">Our Businesses</li>
+  <li data-target="contact">Partner With Us</li>
+  <li data-target="contact">Contact</li>
+</ul>
+
+    </div>
+    <div class="footer-column">
+      <h3>Get In Touch</h3>
+      <p><strong>NMT LIMITED, NEW MENS TAILORS</strong><br>Bahalgarh, Sonipat, Haryana – 131021</p>
+    
+      <p>📞 9671357519</p>
+      <p>🕒 Monday to Sunday – 8:00AM To 9:30PM</p>
+      <p>🌐 Shop Online</p>
+      <div class="social-footer">
+        <a href="#"><img src="link.webp" alt="LinkedIn"></a>
+        <a href="#"><img src="instagram-6338393_1280.webp" alt="Instagram"></a>
+        <a href="#"><img src="fb.png" alt="Facebook"></a>
+        <a href="#"><img src="images.png" alt="Twitter"></a>
+        <a href="#"><img src="yt.jpg" alt="YouTube"></a>
+        <a href="#"><img src="pin.png" alt="Pinterest"></a>
+      </div>
+    </div>
+  </div>
+</section>
+
 
   <!-- Footer -->
   <footer class="footer">&copy; 2025 NMT | New Men's Tailors. All rights reserved.</footer>
@@ -483,6 +592,13 @@ nav a:hover {
       setTimeout(showSlides, 4000);
     }
     showSlides();
+    // Show all sections by default except appointment
+document.querySelectorAll(".output-container").forEach(container => {
+  if (!container.id.includes("appointment")) {
+    container.classList.add("active");
+  }
+});
+
 
     window.addEventListener("DOMContentLoaded", () => {
       const navLinks = document.querySelectorAll("nav a");
@@ -516,6 +632,27 @@ nav a:hover {
         });
       });
     });
+// Make Raymond-style footer links functional
+document.querySelectorAll(".custom-footer li[data-target]").forEach(item => {
+  item.style.cursor = "pointer";
+  item.addEventListener("click", () => {
+    const target = item.getAttribute("data-target");
+    const section = document.getElementById(`${target}-output`);
+    if (section) {
+      // Hide others
+      document.querySelectorAll(".output-container").forEach(c => c.classList.remove("active"));
+      // Show this
+      section.classList.add("active");
+      // Scroll to it
+      const yOffset = -120;
+      const y = section.getBoundingClientRect().top + window.pageYOffset + yOffset;
+      window.scrollTo({ top: y, behavior: "smooth" });
+
+      // Optional: remove active from nav too
+      document.querySelectorAll("nav a").forEach(a => a.classList.remove("active"));
+    }
+  });
+});
 
    function toggleMenu() {
   document.querySelector("nav").classList.toggle("active");
